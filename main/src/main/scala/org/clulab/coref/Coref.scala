@@ -318,6 +318,7 @@ class Coref extends LazyLogging {
     val tbms = mentions.filter(_.isInstanceOf[CorefTextBoundMention]).map(_.asInstanceOf[CorefTextBoundMention])
     val sevts = mentions.filter(m => m.isInstanceOf[CorefEventMention] && m.matches("SimpleEvent")).map(_.asInstanceOf[CorefEventMention])
     val cevts = mentions.filter(m => m.matches("ComplexEvent"))
+    val others = mentions.filter(m => m.isInstanceOf[CorefEventMention] && !m.matches("SimpleEvent") && !m.matches("ComplexEvent"))
 
     val resolvedTBMs = resolveTBMs(tbms)
     val tbmSieveMap = tbmSieves(tbms.filter(_.isGeneric))
